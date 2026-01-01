@@ -1,0 +1,22 @@
+﻿  gamestate.cpp
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(40,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(41,26): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(48,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(49,26): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(56,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(56,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(90,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(147,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(180,24): warning C4244: '=': conversion from 'SnakeGame::SnakeDirection' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(188,24): warning C4244: '=': conversion from 'SnakeGame::SnakeDirection' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(196,24): warning C4244: '=': conversion from 'SnakeGame::SnakeDirection' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(204,24): warning C4244: '=': conversion from 'SnakeGame::SnakeDirection' to 'float', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(219,35): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(240,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\wassimSDN\Desktop\stat\slibDLL\Classic Snake\gamestate.cpp(269,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  5 of 292 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Classic Snake.vcxproj -> C:\Users\wassimSDN\Desktop\stat\slibDLL\x64\Release\Classic Snake.exe

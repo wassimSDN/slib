@@ -1,0 +1,12 @@
+﻿  pch.cpp
+  dllmain.cpp
+  slib.cpp
+  slib_animation.cpp
+  slib_app.cpp
+  slib_default_ressources.cpp
+  slib_draw.cpp
+  slib_hitbox.cpp
+  slib_scene.cpp
+  slib_sound.cpp
+  Generating Code...
+  slibDLL.vcxproj -> C:\Users\wassimSDN\Desktop\stat\slibDLL\x64\Debug\slibDLL.dll
