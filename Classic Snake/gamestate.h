@@ -8,6 +8,8 @@ using namespace slib;
 #define windowSize 500
 #define sizeCells ((float)windowSize/(float)nbrCells)
 #define startSize 0
+#define MIN 1
+#define MAX (nbrCells - 2)
 
 namespace SnakeGame
 {

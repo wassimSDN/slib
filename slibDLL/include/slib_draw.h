@@ -25,6 +25,7 @@ namespace slib
 		bool loadImage(const char* fileName);
 		bool loadImage(const std::string& fileName);
 		bool isCreated() const;
+		bool isLoaded() const;
 		int getWidth() const;
 		int getHeight() const;
 		void getDimensions(int& w, int& h) const;
@@ -33,6 +34,7 @@ namespace slib
 
 	private:
 		SDL_Surface* data = nullptr;
+		bool loaded = false;
 		void createSurfaceFromImage(const char* fileName);
 		void createSurfaceFromColor(uint32_t color);
 		void createSurfaceFromHeader(const unsigned char *dataFromHeader, const size_t size);

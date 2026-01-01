@@ -76,7 +76,7 @@ namespace SnakeGame
 			txtTarget.drawReal(nullptr, posTarget);
 			window.flip();
 
-			//SDL_Delay(1);
+			SDL_Delay(1);
 		}
 	}
 
@@ -157,9 +157,7 @@ namespace SnakeGame
 		std::pair <int, int> randomFoodPos;
 		do
 		{
-			int min = 0;
-			int max = nbrCells - 1;
-			randomFoodPos = { rand() % (max - min + 1) + min , rand() % (max - min + 1) + min };
+			randomFoodPos = { rand() % (MAX - MIN + 1) + MIN , rand() % (MAX - MIN + 1) + MIN };
 		} 
 		while (std::find(body.begin(), body.end(), randomFoodPos) != body.end());
 
@@ -221,9 +219,7 @@ namespace SnakeGame
 			std::pair <int, int> randomFoodPos;
 			do
 			{
-				int min = 0;
-				int max = nbrCells - 1;
-				randomFoodPos = { rand() % (max - min + 1) + min , rand() % (max - min + 1) + min };
+				randomFoodPos = { rand() % (MAX - MIN + 1) + MIN , rand() % (MAX - MIN + 1) + MIN };
 			} 
 			while (std::find(body.begin(), body.end(), randomFoodPos) != body.end());
 

@@ -46,12 +46,14 @@ namespace slib
 
 	bool Surface::isCreated() const { return data; }
 
+	bool Surface::isLoaded() const { return loaded;  }
+
 	int Surface::getWidth() const
 	{
 		if (data)
 			return data->w;
 
-		return 0;
+		return -1;
 	}
 
 	int Surface::getHeight() const
@@ -59,7 +61,7 @@ namespace slib
 		if (data)
 			return data->h;
 
-		return 0;
+		return -1;
 	}
 
 	void Surface::getDimensions(int& w, int& h) const
@@ -72,8 +74,8 @@ namespace slib
 			return;
 		}
 
-		w = 0;
-		h = 0;
+		w = -1;
+		h = -1;
 	}
 
 	void Surface::createSurfaceFromImage(const char* fileName)
@@ -83,7 +85,10 @@ namespace slib
 
 		SDL_Surface* temp = IMG_Load(fileName);
 		if (temp)
+		{
 			data = temp;
+			loaded = true;
+		}
 		else
 			createSurfaceFromHeader(missingTextureData, missingTextureSize);
 	}
@@ -98,6 +103,7 @@ namespace slib
 		{
 			*(uint32_t*)(temp->pixels) = color;
 			data = temp;
+			loaded = true;
 		}
 	}
 
