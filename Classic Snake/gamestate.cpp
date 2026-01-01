@@ -1,6 +1,6 @@
-#include "gamestate.h"
-
 #include <ctime>
+
+#include "gamestate.h"
 
 namespace SnakeGame
 {
@@ -14,7 +14,7 @@ namespace SnakeGame
 			return;
 		
 		Snake player;
-	
+
 		while (true)
 		{
 			e.updateEvents();
@@ -78,11 +78,6 @@ namespace SnakeGame
 
 			SDL_Delay(1);
 		}
-	}
-
-	GameState::~GameState()
-	{
-		window.~Window();
 	}
 
 	bool GameState::init()

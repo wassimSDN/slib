@@ -17,7 +17,7 @@ namespace SnakeGame
 	{
 	public:
 		GameState();
-		~GameState();
+		~GameState() = default;
 		Window window;
 
 		Texture txtTarget;

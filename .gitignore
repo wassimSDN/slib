@@ -1,2 +1,7 @@
 .vs/
 x64/
+slibDLL/x64/
+libs/slib.idp
+libs/slib.pdb
+'Classic Snake'/x64/
+'bezier curves i guess'/x64
