@@ -159,7 +159,6 @@ namespace SnakeGame
 		{
 			int min = 0;
 			int max = nbrCells - 1;
-
 			randomFoodPos = { rand() % (max - min + 1) + min , rand() % (max - min + 1) + min };
 		} 
 		while (std::find(body.begin(), body.end(), randomFoodPos) != body.end());
@@ -224,9 +223,9 @@ namespace SnakeGame
 			{
 				int min = 0;
 				int max = nbrCells - 1;
-
 				randomFoodPos = { rand() % (max - min + 1) + min , rand() % (max - min + 1) + min };
-			} while (std::find(body.begin(), body.end(), randomFoodPos) != body.end());
+			} 
+			while (std::find(body.begin(), body.end(), randomFoodPos) != body.end());
 
 			foodPos = randomFoodPos;
 			score.setText(std::to_string(body.size() - 1 - startSize));
