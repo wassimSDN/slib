@@ -14,6 +14,8 @@ namespace slib
 		// but that's too slow for something like this, it should be fast
 		// because it will probably be called each frame to fill an array 
 		// or something	
+	
+		return { -1, -1 };
 	}
 
 
@@ -65,7 +67,7 @@ namespace slib
 		float y = cy;
 		for (float x = cx; x <= cx + radius; x++)
 		{
-			for (y = cy; (x - cx) * (x - cx) + (y - cy) * (y - cy) <= radius * radius; y++);
+			for (y = cy; (x - cx) * (x - cx) + (y - cy) * (y - cy) <= radius * radius; y++); //maybe using std::sin(radius - x) is faster
 						
 			float xm = 2 * cx - x;
 			float ym = 2 * cy - y;
