@@ -14,6 +14,7 @@ namespace SnakeGame
 			return;
 		
 		Snake player;
+		
 
 		while (true)
 		{
@@ -26,41 +27,23 @@ namespace SnakeGame
 				e.reduceAccumulatedTime();
 			}
 
-			if (e.isResized())
+			if (e.isKeyJustDown(Keys::l))
 			{
-				int w, h;
-				window.getSize(&w, &h);
-
-				float windowRatio = (float)w / (float)h;
-				float textureRatio = (float)windowSize / (float)windowSize;
-				
-
-				if (windowRatio > textureRatio)
-				{
-					posTarget.setDimensions(h * textureRatio, h);
-					float windowMiddleX = w / 2;
-					float x = windowMiddleX - posTarget.get().w / 2;
-					posTarget.setX(x);
-					posTarget.setY(0);
-				}
-				else if(windowRatio < textureRatio)
-				{
-					posTarget.setDimensions(w, w / textureRatio);
-					float windowMiddleY = h / 2;
-					float y = windowMiddleY - posTarget.get().h / 2;
-					posTarget.setX(0);
-					posTarget.setY(y);
-				}
-				else if (false)
-				{
-					posTarget.setDimensions(w, h);
-					posTarget.setPos(0, 0);
-				}
+				SDL_DisplayMode dm;
+				SDL_GetDesktopDisplayMode(0, &dm);
+				window.changeSize(dm.w, dm.h);
+				window.toggleFullscreen();
 			}
+
+			if (e.isKeyJustDown(Keys::r))
+				window.changeSize(windowSize, windowSize);
+
+			if (e.isResized())
+				handleResize();
 			
 			player.update();
 			
-			window.setClearColor(BLACK);
+			window.setClearColor({ 41, 41, 51, 255 });
 			window.clear();
 			window.setRenderTarget(txtTarget);
 			window.setClearColor(CORN);
@@ -84,7 +67,7 @@ namespace SnakeGame
 	{
 		srand(time(nullptr));
 
-		txtTarget.createTextureAsTarget(500, 500);
+		txtTarget.createTextureAsTarget(windowSize, windowSize);
 		if (!txtTarget.isCreated())
 			return false;
 
@@ -98,6 +81,41 @@ namespace SnakeGame
 		}
 
 		return true;
+	}
+
+	void GameState::handleResize()
+	{
+		int w, h;
+		window.getSize(&w, &h);
+
+		float windowRatio = (float)w / (float)h;
+		float textureRatio = (float)windowSize / (float)windowSize;
+
+
+		if (windowRatio >= textureRatio)
+		{
+			posTarget.setDimensions(h * textureRatio, h);
+			float windowMiddleX = w / 2;
+			float x = windowMiddleX - posTarget.get().w / 2;
+			posTarget.setX(x);
+			posTarget.setY(0);
+		}
+		else if (windowRatio < textureRatio)
+		{
+			posTarget.setDimensions(w, w / textureRatio);
+			float windowMiddleY = h / 2;
+			float y = windowMiddleY - posTarget.get().h / 2;
+			posTarget.setX(0);
+			posTarget.setY(y);
+		}
+
+		if (w > 5 * padding && h > 5 * padding)
+		{
+			posTarget.addToX(padding);
+			posTarget.addToW(-2 * padding);
+			posTarget.addToY(padding);
+			posTarget.addToH(-2 * padding);
+		}
 	}
 
 	Snake::Snake()
@@ -114,8 +132,8 @@ namespace SnakeGame
 			fclose(scoreFile);
 		}
 
-		score.createText("", 100);
-		highScoreText.createText("", 30);
+		score.createText("", windowSize / 5);
+		highScoreText.createText("", windowSize / 16);
 
 		init();
 		jazz.play();

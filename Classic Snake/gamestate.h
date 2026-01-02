@@ -5,11 +5,12 @@
 using namespace slib;
 
 #define nbrCells 25
-#define windowSize 500
+#define windowSize 1000
 #define sizeCells ((float)windowSize/(float)nbrCells)
 #define startSize 0
 #define MIN 1
 #define MAX (nbrCells - 2)
+#define  padding 20
 
 namespace SnakeGame
 {
@@ -21,11 +22,12 @@ namespace SnakeGame
 		Window window;
 
 		Texture txtTarget;
-		RectangleReal posTarget = { 0, 0, windowSize, windowSize };
+		RectangleReal posTarget = { padding, padding, windowSize - 2 * padding, windowSize - 2 * padding};
 
 	private:	
 		RectangleReal cells[nbrCells][nbrCells];
 		bool init();
+		void handleResize();
 	};
 
 	enum SnakeDirection
@@ -60,6 +62,6 @@ namespace SnakeGame
 		Music jazz = "snakeJazz.mp3";
 		int highScore = 0;
 		float angle = 0;
-		bool changedDirection = false;;
+		bool changedDirection = false;
 	};
 }

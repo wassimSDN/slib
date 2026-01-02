@@ -238,6 +238,15 @@ namespace slib
 
 	bool Window::isCreated() const { return data; }
 
+	void Window::toggleFullscreen()
+	{
+		uint32_t flags = SDL_GetWindowFlags(data);
+		if(SDL_WINDOW_FULLSCREEN & flags)
+			SDL_SetWindowFullscreen(data, 0);
+		else
+			SDL_SetWindowFullscreen(data, SDL_WINDOW_FULLSCREEN);
+	}
+
 	Window::operator SDL_Window* () const { return data; }
 
 	Window::operator bool() const { return data; }

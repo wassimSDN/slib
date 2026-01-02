@@ -369,6 +369,7 @@ namespace slib
 		void getSize(int* w, int* h);
 		operator SDL_Window* () const;
 		bool isCreated() const;
+		void toggleFullscreen();
 		operator bool() const;
 		const Window& operator=(const Window& other);
 		bool isRendererCreated();
