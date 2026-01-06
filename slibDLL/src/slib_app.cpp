@@ -300,6 +300,6 @@ namespace slib
 		SDL_SetRenderTarget(renderer, nullptr);
 	}
 
-	//SDL_Window* Window::data = nullptr;
+	SDL_Window* Window::data = nullptr;
 	SDL_Renderer* Window::renderer = nullptr;
 }

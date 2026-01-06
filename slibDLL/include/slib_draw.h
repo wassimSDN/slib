@@ -86,6 +86,7 @@ namespace slib
 		void createText(const std::string& fileName, int fontSize = 24);
 		int getW() const;
 		int getH() const;
+		static TTF_Font* createFontFromHeader(int fontSize = 24);
 		//void drawAtlas(SDL_Rect* src, SDL_Rect* dst) const;
 
 	private:
@@ -95,7 +96,6 @@ namespace slib
 		int w;
 		int h;
 		void fillCharacterTextures(const char *fileName, int fontSize = 24);
-		static TTF_Font *createFontFromHeader(int fontSize = 24);
 	};
 
 	class Text2 //DONT USE NOT FINSIHED

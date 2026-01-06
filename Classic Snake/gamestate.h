@@ -10,7 +10,7 @@ using namespace slib;
 #define startSize 0
 #define MIN 1
 #define MAX (nbrCells - 2)
-#define  padding 20
+#define padding 20.0f
 
 namespace SnakeGame
 {

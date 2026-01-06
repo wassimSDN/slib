@@ -1,9 +1,13 @@
-#include <ctime>
+﻿#include <ctime>
 
 #include "gamestate.h"
 
 namespace SnakeGame
 {
+	const Rectangle headSrc = { 0, 0, 32, 32 };
+	const Rectangle bodySrc = { 32, 0, 32, 32 };
+	const Rectangle foodSrc = { 32, 32, 32, 32 };
+
 	GameState::GameState()
 	{
 		Events e;
@@ -14,7 +18,6 @@ namespace SnakeGame
 			return;
 		
 		Snake player;
-		
 
 		while (true)
 		{
@@ -54,7 +57,7 @@ namespace SnakeGame
 					cells[i][j].draw();
 
 			player.draw(cells);
-
+			
 			window.resetRenderTarget();
 			txtTarget.drawReal(nullptr, posTarget);
 			window.flip();
@@ -90,7 +93,7 @@ namespace SnakeGame
 
 		float windowRatio = (float)w / (float)h;
 		float textureRatio = (float)windowSize / (float)windowSize;
-
+	
 
 		if (windowRatio >= textureRatio)
 		{
@@ -283,10 +286,6 @@ namespace SnakeGame
 
 	void Snake::draw(RectangleReal cells[nbrCells][nbrCells])
 	{
-		const Rectangle headSrc = { 0, 0, 32, 32 };
-		const Rectangle bodySrc = { 32, 0, 32, 32 };
-		const Rectangle foodSrc = { 32, 32, 32, 32 };
-		
 		const Vector2 textPos = { (float)windowSize / 2.0f - (float)score.getW() / 2.0f, (float)windowSize / 2.0f - (float)score.getH() / 2.0f };
 		score.draw(textPos);
 		
@@ -296,5 +295,13 @@ namespace SnakeGame
 		txt.drawAngleCenterReal(headSrc, cells[body[0].first][body[0].second], angle);
 		txt.drawReal(foodSrc, cells[foodPos.first][foodPos.second]);
 		highScoreText.draw({ 20, 20 });
+
+		if (isKeyDown(Keys::space))
+		{
+			for (auto& it : body)
+			{
+				cells[it.first][it.second].drawFilled();
+			}
+		}
 	}
 }

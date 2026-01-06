@@ -794,6 +794,7 @@ char *strdup(const char *str);
 #define SDL_vsscanf vsscanf
 #define SDL_snprintf snprintf
 #define SDL_vsnprintf vsnprintf
+
 #endif
 
 SDL_FORCE_INLINE void *SDL_memcpy4(SDL_OUT_BYTECAP(dwords*4) void *dst, SDL_IN_BYTECAP(dwords*4) const void *src, size_t dwords)

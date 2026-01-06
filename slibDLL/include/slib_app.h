@@ -359,20 +359,20 @@ namespace slib
 		Window();
 		~Window();
 		SDL_Window* getData() const;
-		void show();
-		void hide();
-		void changeTitle(const char* title);
-		void changeTitle(const std::string& title);
-		void changeSize(int w, int h);
-		void changePosition(int x, int y);
-		void setIcon(SDL_Surface* icon);
-		void getSize(int* w, int* h);
+		static void show();
+		static void hide();
+		static void changeTitle(const char* title);
+		static void changeTitle(const std::string& title);
+		static void changeSize(int w, int h);
+		static void changePosition(int x, int y);
+		static void setIcon(SDL_Surface* icon);
+		static void getSize(int* w, int* h);
 		operator SDL_Window* () const;
 		bool isCreated() const;
 		void toggleFullscreen();
 		operator bool() const;
 		const Window& operator=(const Window& other);
-		bool isRendererCreated();
+		static bool isRendererCreated();
 		static SDL_Renderer* getRenderer();
 		static void flip();
 		static void setClearColor(unsigned int r, unsigned int g, unsigned int b, unsigned int a);
@@ -383,7 +383,7 @@ namespace slib
 		void createWindow(const char* title, int width, int height, int x, int y, int flags);
 	
 	protected:
-		SDL_Window* data = nullptr;
+		static SDL_Window* data;
 		void setRenderer();
 		void destroyRenderer();
 		static SDL_Renderer* renderer;
@@ -396,6 +396,7 @@ namespace slib
 		friend class RectangleReal;
 		friend class Circle;
 		friend class CircleReal;
+		friend struct Vector3;
 		friend void drawCircle(float cx, float cy, float radius, uint32_t color);
 		friend void drawCircleFilled(float cx, float cy, float radius, uint32_t color);
 		friend void drawCircleStepped(float  cx, float cv, float radius, float step, uint32_t color);

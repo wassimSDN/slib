@@ -11,7 +11,7 @@ namespace slib
 	typedef struct Vector2
 	{
 		Vector2(float x, float y);
-		Vector2();
+		Vector2() = default;
 
 		Vector2 normalise();
 		
@@ -26,6 +26,28 @@ namespace slib
 	Vector2 operator-(const Vector2& first, const Vector2& second);
 	Vector2 operator+=(Vector2& first, const Vector2& second);
 	float operator*(const Vector2& first, const Vector2& second);
+
+	typedef struct Vector3
+	{
+		Vector3(float x, float y, float z);
+		Vector3() = default;
+
+		Vector3 normalise();
+		Vector2 project();
+		Vector2 projectAuto();
+		
+		float x = 0;
+		float y = 0;
+		float z = 0;
+	}Vector3;
+
+	Vector3 operator*(const float scalar, const Vector3& v);
+	Vector3 operator*(const Vector3& v, const float scalar);
+	Vector3 operator+(const Vector3& first, const Vector3& second);
+	Vector3 operator-(const Vector3& first, const Vector3& second);
+	Vector3 operator+=(Vector3& first, const Vector3& second);
+	float operator*(const Vector3& first, const Vector3& second);
+
 
 	class Rectangle
 	{
@@ -80,6 +102,7 @@ namespace slib
 		bool mouseOn(Vector2 mousePos);
 		bool mouseOn();
 		void draw(uint32_t color = 0xff0000ff) const;
+		void drawFilled(uint32_t color = 0xff0000ff) const;
 		operator SDL_FRect* () const;
 		operator SDL_FRect();
 

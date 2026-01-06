@@ -143,6 +143,21 @@ namespace slib
 		Window::setClearColor({ r, g, b, a });
 	}
 
+	void RectangleReal::drawFilled(uint32_t color) const
+	{
+		uint8_t r;
+		uint8_t g;
+		uint8_t b;
+		uint8_t a;
+		SDL_GetRenderDrawColor(Window::renderer, &r, &g, &b, &a);
+
+		SDL_Color c = { color >> 24 & 0xff, color >> 16 & 0xff, color >> 8 & 0xff , color & 0xff };
+		Window::setClearColor(c);
+		SDL_RenderFillRectF(Window::renderer, &data);
+
+		Window::setClearColor({ r, g, b, a });
+	}
+
 	Circle::Circle() {}
 
 	Circle::Circle(int cX, int cY, int radius) { data = { cX - radius, cY - radius, radius * 2, radius * 2}; }
@@ -280,8 +295,6 @@ namespace slib
 
 	CircleReal::operator SDL_FRect* () const { return (SDL_FRect*)(&data); }
 
-    Vector2::Vector2() {}
-
 	Vector2::Vector2(float x, float y)
 		: x(x), y(y) {}
 
@@ -310,4 +323,53 @@ namespace slib
 	}
 
 	float operator*(const Vector2& first, const Vector2& second){ return first.x * second.x + first.y * second.y; }
+
+
+	Vector3::Vector3(float x, float y, float z)
+		: x(x), y(y), z(z) {}
+
+	Vector3 Vector3::normalise()
+	{
+		float length = std::sqrtf(x * x + y * y + z * z);
+		x /= length;
+		y /= length;
+		z /= length;
+
+		return *this;
+	}
+
+	Vector2 Vector3::project()
+	{
+		return { x / z, y / z };
+	}
+
+	Vector2 Vector3::projectAuto()
+	{
+		int w, h;
+		Window::getSize(&w, &h);
+		float xoffset = (float)w / 2.0f;
+		float yoffset = (float)h / 2.0f;
+
+		float d = 1000.0f;
+		float zproj = z + d;
+
+		return { x * (d / zproj) + xoffset, y * (d /  zproj) + yoffset};
+	}
+
+	Vector3 operator*(const float scalar, const Vector3& v) { return Vector3(v.x * scalar, v.y * scalar, v.z * scalar); }
+
+	Vector3 operator*(const Vector3& v, const float scalar) { return Vector3(v.x * scalar, v.y * scalar, v.z * scalar); }
+
+	Vector3 operator+(const Vector3& first, const Vector3& second) { return Vector3(first.x + second.x, first.y + second.y, first.z + second.z); }
+
+	Vector3 operator-(const Vector3& first, const Vector3& second) { return Vector3(first.x - second.x, first.y - second.y, first.z - second.z); }
+
+	Vector3 operator+=(Vector3& first, const Vector3& second)
+	{
+		first = first + second;
+
+		return first;
+	}
+
+
 }
