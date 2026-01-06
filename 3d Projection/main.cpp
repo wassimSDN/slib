@@ -4,10 +4,10 @@
 
 using namespace slib;
 
-#define WIDTH 640
-#define HEIGHT 400
+#define WIDTH 1000
+#define HEIGHT 800
 
-int main()
+int WinMain()
 {
 	Events e;
 	e.setTicks(100);
@@ -26,7 +26,7 @@ int main()
 	};
 
 	SDL_FPoint points2d[8];
-	float angle = 0.1;
+	float angle = 0.0f;
 	Texture txt;
 	float d = 1000.f;
 
@@ -40,8 +40,18 @@ int main()
 		points2d[i] = { p.x, p.y };
 	}
 
-	Text t = "";
+	Text titleText		= "";
+	Text angleText		= "";
+	Text trueText		= "";
+	Text falseText		= "";
 
+	trueText.setText("true");
+	trueText.changeColor(GREEN);
+	falseText.setText("false");
+	falseText.changeColor(RED);
+
+	Vector2 textPos;
+	float origin = 20;
 	
 	window.show();
 	while (true)
@@ -53,6 +63,25 @@ int main()
 		{
 			for (int i = 0; i < 8; i++)
 			{
+				Vector3 vel = { 0, 0, 0 };
+
+				if (e.isKeyDown(Keys::e))
+					vel.z = 10;
+				if (e.isKeyDown(Keys::q))
+					vel.z = -10;
+
+				if (e.isKeyDown(Keys::d))
+					vel.x = 10;
+				if (e.isKeyDown(Keys::a))
+					vel.x = -10;
+
+				if (e.isKeyDown(Keys::w))
+					vel.y = -10;
+				if (e.isKeyDown(Keys::s))
+					vel.y = 10;
+
+				points3d[i] += vel.normalise() * 10;
+
 				float cos = std::cosf(angle);
 				float sin = std::sinf(angle);
 
@@ -60,40 +89,46 @@ int main()
 				float y = points3d[i].y;
 				float z = points3d[i].z;
 
-				if (rz)
+				if (rz || e.isKeyDown(Keys::c))
 					points3d[i] = { x * cos + - y *  sin, x * sin + y * cos, z};
-				if(rx)
+				if(rx || e.isKeyDown(Keys::z))
 					points3d[i] = { x, y * cos - z * sin, y * sin + z * cos};
-				if(ry)
+				if(ry || e.isKeyDown(Keys::x))
 					points3d[i] = { x * cos - z * sin, y, x * sin + z * cos };
 
-
-
 				Vector2 p = points3d[i].projectAuto();
-				points2d[i] = { p.x, p.y };;
+				points2d[i] = { p.x, p.y };
 			}
 
 			e.reduceAccumulatedTime();
 		}
 
-		if (e.isButtonJustDown(leftclick))
-			angle += 0.005;
-		if (e.isButtonJustDown(rightclick))
-			angle -= 0.005;
+		if (e.isButtonDown(leftclick))
+			angle += 0.05f * e.getDeltaTime();
+		if (e.isButtonDown(rightclick))
+			angle -= 0.05f * e.getDeltaTime();
 		if (e.isKeyJustDown(space))
 			angle = -angle;
-		if (e.isKeyJustDown(q))
+		if (e.isKeyJustDown(Keys::r))
 			rx = !rx;
-		if (e.isKeyJustDown(w))
+		if (e.isKeyJustDown(Keys::t))
 			ry = !ry;
-		if (e.isKeyJustDown(Keys::e))
+		if (e.isKeyJustDown(Keys::y))
 			rz = !rz;
-
-		t.setText("Angle: " + std::to_string(angle) + '\n' +
-				  "X rotation: " + (rx ? "true" : "false") + '\n' +
-				  "Y rotation: " + (ry ? "true" : "false") + '\n' +
-			      "Z rotation: " + (rz ? "true" : "false") + '\n');
-
+		if (e.isKeyJustDown(Keys::b))
+		{
+			angle = 0.0f;
+			rx = ry = rz = false;
+			points3d[0] = { 200, 200, 200 };
+			points3d[1] = { -200, 200, 200 };
+			points3d[2] = { 200, -200, 200 };
+			points3d[3] = { -200, -200, 200 };
+			points3d[4] = { 200, 200, -200 };
+			points3d[5] = { -200, 200, -200 };
+			points3d[6] = { 200, -200, -200 };
+			points3d[7] = { -200, -200, -200 };
+			
+		}
 
 		window.setClearColor(BLACK);
 		window.clear();
@@ -113,10 +148,43 @@ int main()
 		SDL_RenderDrawLineF(window.getRenderer(), points2d[4].x, points2d[4].y, points2d[6].x, points2d[6].y);
 		SDL_RenderDrawLineF(window.getRenderer(), points2d[4].x, points2d[4].y, points2d[5].x, points2d[5].y);
 		
-		t.draw({ 20, 20 });
+		textPos = { origin, origin };
 
+		titleText.setText("angle: ");
+		titleText.draw(textPos);
+		textPos.x = origin + titleText.getW();
+
+		angleText.setText(std::to_string(angle));
+		if (angle == 0)
+			angleText.changeColor(GREY);
+		else
+			angle > 0 ? angleText.changeColor(CYAN) : angleText.changeColor(PURPLE);
+		angleText.draw(textPos);
+		textPos.x = origin;
+		textPos.y += titleText.getH();
+
+
+		titleText.setText("X rotation: ");
+		titleText.draw(textPos);
+		textPos.x = origin + titleText.getW();
+		rx ? trueText.draw(textPos) : falseText.draw(textPos);
+		textPos.x = origin;
+		textPos.y += titleText.getH();
+		
+		titleText.setText("Y rotation: ");
+		titleText.draw(textPos);
+		textPos.x = origin + titleText.getW();
+		ry ? trueText.draw(textPos) : falseText.draw(textPos);
+		textPos.x = origin;
+		textPos.y += titleText.getH();
+
+		titleText.setText("Z rotation: ");
+		titleText.draw(textPos);
+		textPos.x = origin + titleText.getW();
+		rz ? trueText.draw(textPos) : falseText.draw(textPos);
+		
 		window.flip();
 
-		SDL_Delay(16);
+		SDL_Delay(1);
 	}
 }

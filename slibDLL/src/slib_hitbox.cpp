@@ -301,8 +301,11 @@ namespace slib
 	Vector2 Vector2::normalise()
 	{
 		float length = std::sqrtf(x * x + y * y);
-		x /= length;
-		y /= length;
+		if(length > 0)
+		{
+			x /= length;
+			y /= length;
+		}
 
 		return *this;
 	}
@@ -331,9 +334,12 @@ namespace slib
 	Vector3 Vector3::normalise()
 	{
 		float length = std::sqrtf(x * x + y * y + z * z);
-		x /= length;
-		y /= length;
-		z /= length;
+		if(length > 0)
+		{
+			x /= length;
+			y /= length;
+			z /= length;
+		}
 
 		return *this;
 	}
