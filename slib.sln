@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sorting Visualizer", "Sorti
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3d Projection", "3d Projection\3d Projection.vcxproj", "{A6F195E8-09DD-496E-AAE1-89354634C32B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Circle Thingy", "Circle Thingy\Circle Thingy.vcxproj", "{C9A773E1-6C36-47E7-A011-52FFB3683A91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{A6F195E8-09DD-496E-AAE1-89354634C32B}.Release|x64.Build.0 = Release|x64
 		{A6F195E8-09DD-496E-AAE1-89354634C32B}.Release|x86.ActiveCfg = Release|Win32
 		{A6F195E8-09DD-496E-AAE1-89354634C32B}.Release|x86.Build.0 = Release|Win32
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Debug|x64.ActiveCfg = Debug|x64
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Debug|x64.Build.0 = Debug|x64
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Debug|x86.ActiveCfg = Debug|Win32
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Debug|x86.Build.0 = Debug|Win32
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Release|x64.ActiveCfg = Release|x64
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Release|x64.Build.0 = Release|x64
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Release|x86.ActiveCfg = Release|Win32
+		{C9A773E1-6C36-47E7-A011-52FFB3683A91}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

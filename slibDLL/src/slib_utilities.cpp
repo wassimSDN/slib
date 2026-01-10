@@ -116,6 +116,24 @@ namespace slib
 
 	void drawCircleStepped(Vector2 c, float radius, float step, uint32_t color) { drawCircleStepped(c.x, c.y, radius, step, color); }
 
+	void drawLine(Vector2 p1, Vector2 p2, uint32_t color)
+	{
+		Color old;
+		SDL_GetRenderDrawColor(Window::renderer, &old.r, &old.g, &old.b, &old.a);
+		const int r = color >> 24 & 0xff;
+		const int g = color >> 16 & 0xff;
+		const int b = color >> 8 & 0xff;
+		const int a = color & 0xff;
+		Window::setClearColor(r, g, b, a);
 
+		SDL_RenderDrawLineF(Window::renderer, p1.x, p1.y, p2.x, p2.y); 
+	
+		Window::setClearColor(old);
+	}
 
+	void showCursor() { SDL_ShowCursor(true); }
+
+	void hideCursor() { SDL_ShowCursor(false); }
+
+	Vector2 fromToV2(Vector2 src, Vector2 dst) { return dst - src; }
 }

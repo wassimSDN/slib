@@ -400,6 +400,7 @@ namespace slib
 		friend void drawCircle(float cx, float cy, float radius, uint32_t color);
 		friend void drawCircleFilled(float cx, float cy, float radius, uint32_t color);
 		friend void drawCircleStepped(float  cx, float cv, float radius, float step, uint32_t color);
+		friend void drawLine(Vector2 p1, Vector2 p2, uint32_t color);
 	};
 
 	typedef enum WindowFlags

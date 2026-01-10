@@ -3,9 +3,6 @@
 
 #include "SDL-Stuff/SDL.h"
 
-#include"slib_app.h"
-
-
 namespace slib
 {
 	typedef struct Vector2
@@ -14,6 +11,7 @@ namespace slib
 		Vector2() = default;
 
 		Vector2 normalise();
+		float length();
 		
 		float x = 0;
 		float y = 0;
@@ -33,6 +31,7 @@ namespace slib
 		Vector3() = default;
 
 		Vector3 normalise();
+		float length();
 		Vector2 project();
 		Vector2 projectAuto();
 		
@@ -151,6 +150,7 @@ namespace slib
 		void addToRadius(float n);
 		float getCenterX() const;
 		float getCenterY() const;
+		Vector2 getCenterPos() const;
 		float getRadius() const;
 		SDL_FRect getRect();
 		bool checkCollision(const CircleReal& other) const;

@@ -18,6 +18,8 @@ namespace slib
 	inline const Vector2 Vect2Down = { 0, 1 };
 	inline const Vector2 Vect2Left = {-1, 0};
 
+	typedef int Index;
+
 	typedef struct Color
 	{
 		uint8_t r = 0;
@@ -50,8 +52,10 @@ namespace slib
 	void drawCircleFilled(Vector2 c, float radius, uint32_t color = WHITE);
 	void drawCircleStepped(float  cx, float cv, float radius, float step, uint32_t color = WHITE);
 	void drawCircleStepped(Vector2 c, float radius, float step, uint32_t color = WHITE);
-
-	
+	void drawLine(Vector2 p1, Vector2 p2, uint32_t color = RED);
+	void showCursor();
+	void hideCursor();
+	Vector2 fromToV2(Vector2 src, Vector2 dst);
 }
 
 #endif

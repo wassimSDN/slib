@@ -1,5 +1,6 @@
 #include "../include/slib_hitbox.h"
 #include "../include/slib_utilities.h"
+#include "../include/slib_app.h"
 
 
 
@@ -162,11 +163,11 @@ namespace slib
 
 	Circle::Circle(int cX, int cY, int radius) { data = { cX - radius, cY - radius, radius * 2, radius * 2}; }
 
-	void Circle::setCenterX(int cX) { data.x = cX  - data.w / 2; }
+	void Circle::setCenterX(int cX) { data.x = cX - data.w / 2; }
 
 	void Circle::setCenterY(int cY) { data.y = cY - data.h / 2; }
 
-	void Circle::setRadius(int radius) { data.w = data.h = radius; }
+	void Circle::setRadius(int radius) { data.w = data.h = radius * 2; }
 
 	void Circle::addToCenterX(int n) { data.x += n; }
 
@@ -199,20 +200,21 @@ namespace slib
 			
 	bool Circle::checkCollisionWithRect(const SDL_Rect& rect) const
 	{
-		int closestX = getCenterX();
-		int closestY = getCenterY();
-
-	 
+		int closestX, closestY;
 
 		if (getCenterX() <= rect.x)
 			closestX = rect.x;
 		else if (getCenterX() >= rect.x + rect.w)
 			closestX = rect.x + rect.w;
+		else
+			closestX = getCenterX();
 
 		if (getCenterY() <= rect.y)
 			closestY = rect.y;
 		else if (getCenterY() >= rect.y + rect.h)
 			closestY = rect.y + rect.h;
+		else
+			closestY = getCenterY();
 
 		int distanceX = closestX - getCenterX();
 		int distanceY = closestY - getCenterY();
@@ -220,9 +222,9 @@ namespace slib
 		return distanceX * distanceX + distanceY * distanceY < getRadius() * getRadius();
 	}
 
-	void Circle::add(Vector2 v) { data.x += v.x; data.y += v.y; }
+	void Circle::add(Vector2 v) { data.x += (int)v.x; data.y += (int)v.y; }
 
-	void Circle::draw(uint32_t color) const { drawCircle(getCenterX(), getCenterY(), data.w / 2, color); }
+	void Circle::draw(uint32_t color) const { drawCircle((float)getCenterX(), (float)getCenterY(), (float)data.w / 2.0f, color); }
 
 	Circle::operator SDL_Rect* () const { return (SDL_Rect*)(&data); }
 
@@ -235,7 +237,7 @@ namespace slib
 
 	void CircleReal::setCenterY(float cY) { data.y = cY - data.h / 2; }
 
-	void CircleReal::setRadius(float radius) { data.w = data.h = radius; }
+	void CircleReal::setRadius(float radius) { data.w = data.h = radius * 2; }
 
 	void CircleReal::addToCenterX(float n) { data.x += n; }
 
@@ -251,6 +253,8 @@ namespace slib
 	float CircleReal::getCenterX() const { return data.x + data.w / 2; }
 	      
 	float CircleReal::getCenterY() const { return data.y + data.h / 2; }
+
+	Vector2 CircleReal::getCenterPos() const { return { getCenterX(), getCenterY() }; }
 
 	float CircleReal::getRadius() const { return data.w / 2; }
 
@@ -268,19 +272,21 @@ namespace slib
 
 	bool CircleReal::checkCollisionWithRect(const SDL_FRect& rect) const
 	{
-		float closestX = getCenterX();
-		float closestY = getCenterY();
-
+		float closestX, closestY;
 
 		if (getCenterX() <= rect.x)
 			closestX = rect.x;
 		else if (getCenterX() >= rect.x + rect.w)
 			closestX = rect.x + rect.w;
+		else
+			closestX = getCenterX();
 
 		if (getCenterY() <= rect.y)
 			closestY = rect.y;
 		else if (getCenterY() >= rect.y + rect.h)
 			closestY = rect.y + rect.h;
+		else
+			closestY = getCenterY();
 
 		float distanceX = closestX - getCenterX();
 		float distanceY = closestY - getCenterY();
@@ -309,6 +315,8 @@ namespace slib
 
 		return *this;
 	}
+
+	float Vector2::length() { return std::sqrtf(x * x + y * y); }
 
 	Vector2 operator*(const float scalar, const Vector2& v) { return Vector2(v.x * scalar, v.y * scalar); }
 
@@ -343,6 +351,8 @@ namespace slib
 
 		return *this;
 	}
+
+	float Vector3::length() { return std::sqrtf(x * x + y * y + z * z); }
 
 	Vector2 Vector3::project()
 	{

@@ -170,6 +170,7 @@
     <ClInclude Include="include\slib_node.h" />
     <ClInclude Include="include\slib_scene.h" />
     <ClInclude Include="include\slib_sound.h" />
+    <ClInclude Include="include\slib_ui.h" />
     <ClInclude Include="include\slib_utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

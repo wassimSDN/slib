@@ -27,7 +27,6 @@ int WinMain()
 
 	SDL_FPoint points2d[8];
 	float angle = 0.0f;
-	Texture txt;
 	float d = 1000.f;
 
 	bool rx = false;
@@ -40,24 +39,27 @@ int WinMain()
 		points2d[i] = { p.x, p.y };
 	}
 
-	Text titleText		= "";
-	Text angleText		= "";
-	Text trueText		= "";
-	Text falseText		= "";
+	const int fontSize = 40;
+	Text titleText = { "", fontSize };
+	Text angleText = { "", fontSize };
+	Text trueText  = { "", fontSize };
+	Text falseText = { "", fontSize };
 
-	trueText.setText("true");
+	trueText.setText("on");
 	trueText.changeColor(GREEN);
-	falseText.setText("false");
+	falseText.setText("off");
 	falseText.changeColor(RED);
 
 	Vector2 textPos;
 	float origin = 20;
+	float xoffset = WIDTH / 2;
+	float yoffset = HEIGHT / 2;
 	
 	window.show();
 	while (true)
 	{
 		e.updateEvents();
-		if (e.shouldQuit())
+		if (e.shouldQuit() || e.isKeyJustDown(Keys::escape))
 			break;
 		while (e.ticking())
 		{
@@ -110,11 +112,20 @@ int WinMain()
 		if (e.isKeyJustDown(space))
 			angle = -angle;
 		if (e.isKeyJustDown(Keys::r))
+		{
 			rx = !rx;
+			ry = rz = false;
+		}
 		if (e.isKeyJustDown(Keys::t))
+		{
 			ry = !ry;
+			rx = rz = false;
+		}
 		if (e.isKeyJustDown(Keys::y))
+		{
 			rz = !rz;
+			rx = ry = false;
+		}
 		if (e.isKeyJustDown(Keys::b))
 		{
 			angle = 0.0f;
@@ -129,6 +140,8 @@ int WinMain()
 			points3d[7] = { -200, -200, -200 };
 			
 		}
+
+
 
 		window.setClearColor(BLACK);
 		window.clear();
@@ -185,6 +198,6 @@ int WinMain()
 		
 		window.flip();
 
-		SDL_Delay(1);
+		SDL_Delay(2);
 	}
 }

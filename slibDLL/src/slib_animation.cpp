@@ -5,11 +5,6 @@ namespace slib
 	AnimatedTexture::AnimatedTexture() {}
 
 	AnimatedTexture::AnimatedTexture(const char *fileName, int nbrFrames, int fps, int x, int y, int w, int h)
-		:	currentFrame(0, 0, 1, 1),
-			startX(0),
-			startY(0),
-			frameTime(1.0f / fps),
-			nbrFrames(2)
 	{
 		Surface temp = fileName;
 		spriteSheet.createTexture(temp);
@@ -18,25 +13,38 @@ namespace slib
 			currentFrame = { x, y, w, h };
 			startX = x;
 			startY = y;
+			frameTime = 1.0f / fps;
 			this->nbrFrames = nbrFrames;
+		}
+		else
+		{
+			currentFrame = { 0, 0, 1, 2 };
+			startX = 0;
+			startY = 0;
+			frameTime = 1.0f;
+			this->nbrFrames = 2;
 		}
 	}
 
 	AnimatedTexture::AnimatedTexture(const std::string& fileName, int nbrFrames, int fps, int x, int y, int w, int h)
-		: currentFrame(0, 0, 1, 1),
-		  startX(0),
-		  startY(0),
-		  frameTime(1.0f / fps),
-		  nbrFrames(2)
 	{
-		Surface temp = fileName;
+		Surface temp = fileName.c_str();
 		spriteSheet.createTexture(temp);
 		if (temp.isLoaded())
 		{
 			currentFrame = { x, y, w, h };
 			startX = x;
 			startY = y;
+			frameTime = 1.0f / fps;
 			this->nbrFrames = nbrFrames;
+		}
+		else
+		{
+			currentFrame = { 0, 0, 1, 2 };
+			startX = 0;
+			startY = 0;
+			frameTime = 1.0f;
+			this->nbrFrames = 2;
 		}
 	}
 
